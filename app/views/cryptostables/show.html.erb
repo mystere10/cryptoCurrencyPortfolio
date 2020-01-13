@@ -21,4 +21,5 @@
 </p>
 
 <%= link_to 'Edit', edit_cryptostable_path(@cryptostable) %> |
+<%= link_to 'Destroy', @cryptostable, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', cryptostables_path %>
