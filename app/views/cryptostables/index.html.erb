@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cryptostables</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>User</th>
+      <th>Cost per</th>
+      <th>Amount owned</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cryptostables.each do |cryptostable| %>
+      <tr>
+        <td><%= cryptostable.symbol %></td>
+        <td><%= cryptostable.user_id %></td>
+        <td><%= cryptostable.cost_per %></td>
+        <td><%= cryptostable.amount_owned %></td>
+        <td><%= link_to 'Show', cryptostable %></td>
+        <td><%= link_to 'Edit', edit_cryptostable_path(cryptostable) %></td>
+        <td><%= link_to 'Destroy', cryptostable, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cryptostable', new_cryptostable_path %>

@@ -1,0 +1,2 @@
+module CryptostablesHelper
+end

@@ -1,0 +1,2 @@
+class Cryptostable < ApplicationRecord
+end

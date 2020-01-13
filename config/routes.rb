@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cryptostables
   devise_for :users
   get 'home/about'
   get 'home/lookup'
