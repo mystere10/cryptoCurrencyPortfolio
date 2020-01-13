@@ -1,5 +1,7 @@
 class CryptostablesController < ApplicationController
   before_action :set_cryptostable, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update, :destroy, :show]
 
   # GET /cryptostables
   # GET /cryptostables.json
@@ -70,5 +72,10 @@ class CryptostablesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cryptostable_params
       params.require(:cryptostable).permit(:symbol, :user_id, :cost_per, :amount_owned)
+    end
+
+    def correct_user
+      @correct = current_user.cryptostables.find_by(id: params[:id])
+      redirect_to cryptostables_path, notice: "Not authorized to edit entry" if @correct.nil?
     end
 end

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Cryptostables</h1>
+<h1>Cryptos</h1>
 
 <table>
   <thead>
@@ -15,6 +15,7 @@
 
   <tbody>
     <% @cryptostables.each do |cryptostable| %>
+      <% if cryptostable.user_id == current_user.id %>
       <tr>
         <td><%= cryptostable.symbol %></td>
         <td><%= cryptostable.user_id %></td>
@@ -24,10 +25,11 @@
         <td><%= link_to 'Edit', edit_cryptostable_path(cryptostable) %></td>
         <td><%= link_to 'Destroy', cryptostable, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Cryptostable', new_cryptostable_path %>
+<%= link_to 'New Crypto', new_cryptostable_path %>
