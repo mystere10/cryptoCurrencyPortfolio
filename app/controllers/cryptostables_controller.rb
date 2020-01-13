@@ -16,6 +16,7 @@ class CryptostablesController < ApplicationController
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
     @lookup_cryptos = JSON.parse(@response)
+    @profit_loss = 0
   end
 
   # GET /cryptostables/1

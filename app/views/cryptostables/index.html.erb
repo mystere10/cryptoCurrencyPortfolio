@@ -6,8 +6,15 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Symbol</th>
-      <th>Cost per</th>
+      <th>Current price</th>
+      <th>1 HR Change</th>
+      <th>24 HRs Change</th>
+      <th>7 Days Change</th>
+      <th>Current value</th>
+      <th>Profit/Loss</th>
+      <th>Total paid</th>
+      <th>Rank</th>
+      <th>Cost paid per</th>
       <th>Amount owned</th>
       <th colspan="3"></th>
     </tr>
@@ -20,10 +27,18 @@
         <% for x in @lookup_cryptos["data"] %>
           <% if cryptostable.symbol.upcase == x["symbol"]%>
             <td><%= link_to x["name"], cryptostable %></td>
+            <td>$<%=x["quote"]["USD"]["price"]%></td>
+            <td>$<%=x["quote"]["USD"]["percent_change_1h"]%></td>
+            <td>$<%=x["quote"]["USD"]["percent_change_24h"]%></td>
+            <td>$<%=x["quote"]["USD"]["percent_change_7d"]%></td>
+            <td><%= x["quote"]["USD"]["price"].to_d * cryptostable.amount_owned%></td>
+            <td><%= (x["quote"]["USD"]["price"].to_d * cryptostable.amount_owned) - (cryptostable.cost_per * cryptostable.amount_owned)%></td>
+            <td><%= cryptostable.cost_per * cryptostable.amount_owned%></td>
+            <td><%=x["cmc_rank"]%></td>
+            <%@profit_loss += x["quote"]["USD"]["price"].to_d * cryptostable.amount_owned%>
           <%end%>
         <%end%>
-        <td><%= cryptostable.symbol %></td>
-        <td><%= cryptostable.cost_per %></td>
+        <td>$<%= cryptostable.cost_per %></td>
         <td><%= cryptostable.amount_owned %></td>
       </tr>
       <% end %>
@@ -32,5 +47,6 @@
 </table>
 
 <br>
-
+<br>
+<strong>Profit/Loss:</strong> <%= number_to_currency(@profit_loss)%><br><br>
 <%= link_to 'New Crypto', new_cryptostable_path, class: 'btn btn-default' %>
